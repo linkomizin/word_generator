@@ -29,6 +29,9 @@ class Ui_Form(QtWidgets.QWidget):
         self.vbox_text = QtWidgets.QVBoxLayout()
         self.hbox.addLayout(self.vbox_text)
 
+        self.date_calendar = QtWidgets.QLabel('Дата:')
+        self.vbox.addWidget(self.date_calendar)
+
 
         self.dateEdit = QtWidgets.QDateEdit()
         self.dateEdit.setGeometry(QtCore.QRect(10, 10, 110, 24))
@@ -45,6 +48,9 @@ class Ui_Form(QtWidgets.QWidget):
         self.pushButton.setGeometry(QtCore.QRect(0, 60, 113, 32))
         self.vbox.addWidget(self.pushButton)
         self.pushButton.clicked.connect(self.write_template)
+
+        self.car = QtWidgets.QLabel('TC: ')
+        self.vbox_car.addWidget(self.car)
 
         self.radioButton = QtWidgets.QRadioButton('400')
         self.radioButton.setGeometry(QtCore.QRect(130, 10, 100, 20))
@@ -71,7 +77,7 @@ class Ui_Form(QtWidgets.QWidget):
         self.kilomter_a.setGeometry(QtCore.QRect(130, 10, 100, 20))
         self.kilomter_a.setMaxLength(6)
         self.vbox_text.addWidget(self.kilomter_a)
-        self.kilomter_a.textEdited.connect(self.km_add)
+        self.kilomter_a.textEdited.connect(self.add_km_a)
 
         self.label_km_b = QtWidgets.QLabel('При заезде, км')
         self.vbox_text.addWidget(self.label_km_b)
@@ -80,9 +86,42 @@ class Ui_Form(QtWidgets.QWidget):
         self.kilomter_b.setGeometry(QtCore.QRect(130, 10, 100, 20))
         self.kilomter_b.setMaxLength(6)
         self.vbox_text.addWidget(self.kilomter_b)
+        self.kilomter_b.textEdited.connect(self.add_km_b)
 
-    def km_add(self, km):
+        self.hbox_fuel = QtWidgets.QHBoxLayout()
+        self.vbox_fuel = QtWidgets.QVBoxLayout()
+        self.hbox.addLayout(self.hbox_fuel)
+        self.hbox_fuel.addLayout(self.vbox_fuel)
+
+        self.label_km_tdu = QtWidgets.QLabel('ТДУ, км')
+        self.vbox_fuel.addWidget(self.label_km_tdu)
+
+        self.kilomter_tdu = QtWidgets.QLineEdit()
+        self.kilomter_tdu.setGeometry(QtCore.QRect(130, 10, 100, 20))
+        self.kilomter_tdu.setMaxLength(6)
+        self.vbox_fuel.addWidget(self.kilomter_tdu)
+        self.kilomter_tdu.textEdited.connect(self.add_km_tdu)
+
+        self.label_fuel = QtWidgets.QLabel('Литры')
+        self.vbox_fuel.addWidget(self.label_fuel)
+
+        self.litres = QtWidgets.QLineEdit()
+        self.litres.setGeometry(QtCore.QRect(130, 10, 100, 20))
+        self.litres.setMaxLength(6)
+        self.vbox_fuel.addWidget(self.litres)
+        # self.litres.textEdited.connect(self.add_km_tdu)
+
+        
+
+
+    def add_km_a(self, km):
         context['km_a'] = km
+    
+    def add_km_b(self, km):
+        context['km_b'] = km
+
+    def add_km_tdu(self, km):
+        context['km'] = km
 
 
     def date_add(self, a):
