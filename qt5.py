@@ -109,7 +109,7 @@ class Ui_Form(QtWidgets.QWidget):
         self.litres.setGeometry(QtCore.QRect(130, 10, 100, 20))
         self.litres.setMaxLength(6)
         self.vbox_fuel.addWidget(self.litres)
-        # self.litres.textEdited.connect(self.add_km_tdu)
+        self.litres.textEdited.connect(self.add_km_tdu)
 
         
 
